@@ -176,6 +176,12 @@ export class YahtzeeGameComponent implements OnInit {
     this.reRolls--;
   }
 
+  onClickStartAgain(){
+    this.turns = 13; 
+    this.initialiseTable(); 
+    this.reRolls = 3; 
+  }
+
   hold(die: number) {
     this.held[die] = !this.held[die];
   }
