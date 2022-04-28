@@ -98,7 +98,6 @@ export class YahtzeeGameComponent implements OnInit {
 
   ngOnInit(): void {
     this.initialiseTable();
-    console.log(this.tableData);
   }
 
   initialiseTable() {
@@ -132,8 +131,9 @@ export class YahtzeeGameComponent implements OnInit {
   }
 
   sequence(seq: number, rolls: number[]) {
+    let temp = [...rolls];
     return (
-      rolls
+      temp
         .sort((a, b) => {
           return a - b;
         })
@@ -159,12 +159,15 @@ export class YahtzeeGameComponent implements OnInit {
   }
 
   rollDice() {
+    let newRolls: number[] = [];
     for (let i = 0; i < this.rolls.length; i++) {
       if (!this.held[i]) {
-        this.rolls.splice(i, 1, Math.floor(Math.random() * 6) + 1);
+        newRolls.push(Math.floor(Math.random() * 6) + 1);
+      } else {
+        newRolls.push(this.rolls[i]);
       }
     }
-    console.log(this.rolls)
+    this.rolls = [...newRolls];
   }
 
   onClickRoll() {

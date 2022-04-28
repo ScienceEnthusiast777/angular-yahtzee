@@ -14,9 +14,7 @@ export class TableComponent implements OnInit {
   @Output() commitScore = new EventEmitter<string>();
   constructor() {}
 
-  ngOnInit(): void {
-    console.log(this.tableData);
-  }
+  ngOnInit(): void {}
 
   onClickCommitScore(criteria: string) {
     this.commitScore.emit(criteria);
