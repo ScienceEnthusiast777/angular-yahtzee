@@ -86,7 +86,7 @@ export class YahtzeeGameComponent implements OnInit {
 
   public held = new Array(5).fill(false);
 
-  public rolls: number[] = new Array(5).fill(0);
+  public rolls: number[] = new Array(5).fill(1);
 
   public tableData: Table = {};
 
@@ -160,11 +160,11 @@ export class YahtzeeGameComponent implements OnInit {
 
   rollDice() {
     for (let i = 0; i < this.rolls.length; i++) {
-      console.log(this.held[i]);
       if (!this.held[i]) {
         this.rolls.splice(i, 1, Math.floor(Math.random() * 6) + 1);
       }
     }
+    console.log(this.rolls)
   }
 
   onClickRoll() {

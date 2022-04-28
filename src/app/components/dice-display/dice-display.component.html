@@ -1,6 +1,8 @@
-<div *ngFor="let roll of rolls, let i = index">
-  <p>
-    {{ roll }}
-  </p>
-  <button [disabled]="reRolls === 3" (click)="onClickHold(i)">{{held[i] ? 'un-hold' : 'hold'}}</button>
+<div class="dice-container">
+  <div class="die" *ngFor="let roll of rolls; let i = index">
+    <app-dice [die]="roll"></app-dice>
+    <button [disabled]="reRolls === 3" (click)="onClickHold(i)">
+      {{ held[i] ? "un-hold" : "hold" }}
+    </button>
+  </div>
 </div>
