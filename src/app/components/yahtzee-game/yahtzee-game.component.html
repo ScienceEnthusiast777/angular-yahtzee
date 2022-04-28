@@ -1,2 +1,5 @@
-<app-dice-display></app-dice-display>
-<app-table></app-table>
+<app-dice-display [rolls]="rolls"></app-dice-display>
+<app-table [tableData]="myTable"></app-table>
+<div>
+    <button (click)="onClickRoll()">Roll</button>
+</div>

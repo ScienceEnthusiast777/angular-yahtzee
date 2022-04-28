@@ -1,1 +1,12 @@
-<p>table works!</p>
+<table>
+    <tr>
+        <th>Scoring Criteria</th>
+        <th>Potential to Score</th>
+        <th>Score</th>
+    </tr>
+    <tr *ngFor="let criteria of objectkeys(tableData)">
+        <td>{{criteria}}</td>
+        <td>{{tableData[criteria].potentialScore}}</td>
+        <td>{{tableData[criteria].score}}</td>
+    </tr>
+</table>

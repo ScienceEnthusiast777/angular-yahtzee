@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 type LookUp = { [key: string]: any };
 
-type Table = {
+export type Table = {
   [key: string]: {
     potentialScore: number;
     score: number;
@@ -85,13 +85,11 @@ export class YahtzeeGameComponent implements OnInit {
     },
   };
 
-  private rolls: number[] = new Array(5).fill(0);
-
   private held = new Array(5).fill(false);
 
-  private myTable: Table = {};
+  public rolls: number[] = new Array(5).fill(0);
 
-  private objectkeys = Object.keys; 
+  public myTable: Table = {};
 
   constructor() {}
 
@@ -164,6 +162,11 @@ export class YahtzeeGameComponent implements OnInit {
         this.rolls.splice(i, 1, Math.floor(Math.random() * 6) + 1);
       }
     }
+  }
+
+  onClickRoll(){
+    this.rollDice()
+    this.calcPotential()
   }
 
   hold(die: number) {
