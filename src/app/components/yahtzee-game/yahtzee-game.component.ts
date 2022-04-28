@@ -16,7 +16,6 @@ export type Table = {
   styleUrls: ['./yahtzee-game.component.css'],
 })
 export class YahtzeeGameComponent implements OnInit {
-
   private criterias = [
     'aces',
     'twos',
@@ -85,17 +84,21 @@ export class YahtzeeGameComponent implements OnInit {
     },
   };
 
-  private held = new Array(5).fill(false);
+  public held = new Array(5).fill(false);
 
   public rolls: number[] = new Array(5).fill(0);
 
-  public myTable: Table = {};
+  public tableData: Table = {};
+
+  public turns: number = 13;
+
+  public reRolls: number = 3;
 
   constructor() {}
 
   ngOnInit(): void {
     this.initialiseTable();
-    console.log(this.myTable)
+    console.log(this.tableData);
   }
 
   initialiseTable() {
@@ -107,7 +110,7 @@ export class YahtzeeGameComponent implements OnInit {
         hasBeenScored: false,
       };
     });
-    this.myTable = temp;
+    this.tableData = temp;
   }
 
   upperSection(die: number, rolls: number[]) {
@@ -149,7 +152,7 @@ export class YahtzeeGameComponent implements OnInit {
 
   calcPotential() {
     this.criterias.forEach((criteria) => {
-      this.myTable[criteria].potentialScore = this.yahtzeeScoring[criteria](
+      this.tableData[criteria].potentialScore = this.yahtzeeScoring[criteria](
         this.rolls
       );
     });
@@ -164,16 +167,23 @@ export class YahtzeeGameComponent implements OnInit {
     }
   }
 
-  onClickRoll(){
-    this.rollDice()
-    this.calcPotential()
+  onClickRoll() {
+    this.rollDice();
+    this.calcPotential();
+    this.reRolls--;
   }
 
   hold(die: number) {
-    this.held[die - 1] = true;
+    this.held[die] = !this.held[die];
   }
 
-  score(criteria: string) {
-    //commit to scoring for this criteria
+  commitScore(criteria: string) {
+    this.tableData[criteria].hasBeenScored = true;
+    this.tableData[criteria].score = this.tableData[criteria].potentialScore;
+    this.reRolls = 3;
+    this.held = new Array(5).fill(false);
+    if (this.turns != 0) {
+      this.turns--;
+    }
   }
 }

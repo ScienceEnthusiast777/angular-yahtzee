@@ -1,15 +1,20 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-dice-display',
   templateUrl: './dice-display.component.html',
-  styleUrls: ['./dice-display.component.css']
+  styleUrls: ['./dice-display.component.css'],
 })
 export class DiceDisplayComponent implements OnInit {
-  @Input() rolls : number[] = []
-  constructor() { }
+  @Input() rolls: number[] = [];
+  @Input() held: boolean[] = [];
+  @Input() reRolls: number = 0;
+  @Output() hold = new EventEmitter<number>();
+  constructor() {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  onClickHold(index: number) {
+    this.hold.emit(index);
   }
-
 }

@@ -3,10 +3,14 @@
         <th>Scoring Criteria</th>
         <th>Potential to Score</th>
         <th>Score</th>
+        <th>Add Score</th>
     </tr>
     <tr *ngFor="let criteria of objectkeys(tableData)">
         <td>{{criteria}}</td>
         <td>{{tableData[criteria].potentialScore}}</td>
         <td>{{tableData[criteria].score}}</td>
+        <td><button (click)="onClickCommitScore(criteria)" [disabled]="reRolls === 3" *ngIf="!tableData[criteria].hasBeenScored; else alreadyScored">score this round</button></td>
     </tr>
 </table>
+
+<ng-template #alreadyScored>Already scored</ng-template>

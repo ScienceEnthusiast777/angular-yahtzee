@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Table } from '../yahtzee-game/yahtzee-game.component';
 
 @Component({
@@ -10,9 +10,15 @@ export class TableComponent implements OnInit {
   public objectkeys = Object.keys;
 
   @Input() tableData: Table = {};
+  @Input() reRolls: number = 0;
+  @Output() commitScore = new EventEmitter<string>();
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.tableData)
+    console.log(this.tableData);
+  }
+
+  onClickCommitScore(criteria: string) {
+    this.commitScore.emit(criteria);
   }
 }

@@ -1,5 +1,20 @@
-<app-dice-display [rolls]="rolls"></app-dice-display>
-<app-table [tableData]="myTable"></app-table>
+<h2 *ngIf="turns > 0; else gameOver">Rounds remaining: {{ turns }}/13</h2>
+<app-dice-display
+  (hold)="hold($event)"
+  [held]="held"
+  [reRolls]="reRolls"
+  [rolls]="rolls"
+></app-dice-display>
+<app-table
+  (commitScore)="commitScore($event)"
+  [reRolls]="reRolls"
+  [tableData]="tableData"
+></app-table>
 <div>
-    <button (click)="onClickRoll()">Roll</button>
+  <button [disabled]="reRolls <= 0" (click)="onClickRoll()">Roll</button>
+  <p>{{ reRolls }}/3 re-rolls remaining</p>
 </div>
+<ng-template #gameOver>
+  <h2>Game Over !</h2>
+  <button>Start Again !</button>
+</ng-template>
