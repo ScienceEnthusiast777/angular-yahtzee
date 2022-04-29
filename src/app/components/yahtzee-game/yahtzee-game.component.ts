@@ -139,7 +139,7 @@ export class YahtzeeGameComponent implements OnInit {
         })
         .map((e, i) => {
           if (i > 0) {
-            return e === rolls[i - 1] + 1;
+            return e === temp[i - 1] + 1;
           } else {
             return true;
           }
